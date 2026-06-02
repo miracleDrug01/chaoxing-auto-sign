@@ -113,6 +113,8 @@ QSlider::handle:horizontal{background:#4a6cf7;border:none;width:16px;height:16px
 QSlider::handle:horizontal:hover{background:#3b5de7;}
 QSlider::sub-page:horizontal{background:#4a6cf7;border-radius:3px;}
 QLabel#setting_title{font-size:14px;font-weight:bold;color:#333;}
+QLabel#card_title{font-size:13px;font-weight:bold;color:#333;}
+QLabel#page_header{font-size:18px;font-weight:bold;color:#333;}
 QLabel#setting_hint{font-size:11px;color:#999;}
 QCheckBox{font-size:13px;color:#333;spacing:6px;}
 QLabel{color:#333;}
@@ -146,6 +148,8 @@ QSlider::handle:horizontal{background:#4a6cf7;border:none;width:16px;height:16px
 QSlider::handle:horizontal:hover{background:#3b5de7;}
 QSlider::sub-page:horizontal{background:#4a6cf7;border-radius:3px;}
 QLabel#setting_title{font-size:14px;font-weight:bold;color:#cdd6f4;}
+QLabel#card_title{font-size:13px;font-weight:bold;color:#cdd6f4;}
+QLabel#page_header{font-size:18px;font-weight:bold;color:#cdd6f4;}
 QLabel#setting_hint{font-size:11px;color:#6c7086;}
 QTextEdit{font-family:'Consolas','Microsoft YaHei';font-size:12px;}
 QCheckBox{font-size:13px;color:#cdd6f4;spacing:6px;}
@@ -256,7 +260,7 @@ class MainWindow(QMainWindow):
         cl = QVBoxLayout(cc); cl.setContentsMargins(14, 10, 14, 8); cl.setSpacing(6)
         ch = QHBoxLayout()
         t = QLabel("  签到白名单")
-        t.setStyleSheet("font-size:13px;font-weight:bold;color:#333;"); ch.addWidget(t)
+        t.setObjectName("card_title"); ch.addWidget(t)
         self.cnt = QLabel(""); self.cnt.setStyleSheet("font-size:11px;color:#999;")
         ch.addWidget(self.cnt); ch.addStretch()
         for txt, slot in [("全选", self._all), ("清空", self._none),
@@ -275,8 +279,8 @@ class MainWindow(QMainWindow):
         lc = QFrame(); lc.setObjectName("card")
         ll = QVBoxLayout(lc); ll.setContentsMargins(14, 8, 14, 8); ll.setSpacing(4)
         lh = QHBoxLayout()
-        lh.addWidget(QLabel("  签到日志"))
-        lh.itemAt(0).widget().setStyleSheet("font-size:13px;font-weight:bold;color:#333;")
+        log_title = QLabel("  签到日志")
+        log_title.setObjectName("card_title"); lh.addWidget(log_title)
         lh.addStretch()
         cb = QPushButton("清空"); cb.setFixedSize(54, 24)
         cb.setStyleSheet(STYLE_OUTLINE); cb.clicked.connect(self._clr_log); lh.addWidget(cb)
@@ -293,7 +297,7 @@ class MainWindow(QMainWindow):
         page = QWidget()
         ly = QVBoxLayout(page); ly.setContentsMargins(24, 20, 24, 16); ly.setSpacing(14)
 
-        hdr = QLabel("设置"); hdr.setStyleSheet("font-size:18px;font-weight:bold;color:#333;")
+        hdr = QLabel("设置"); hdr.setObjectName("page_header")
         ly.addWidget(hdr)
 
         c1 = QFrame(); c1.setObjectName("card")
